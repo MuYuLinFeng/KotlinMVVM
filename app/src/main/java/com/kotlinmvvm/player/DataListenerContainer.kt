@@ -56,8 +56,7 @@ class DataListenerContainer<T> {
         }
     }
 
-    inner class ValueObserverWrapper(private val valueObserver: (T?) -> Unit) :
-        AbsLifeCycle() {
+    inner class ValueObserverWrapper(private val valueObserver: (T?) -> Unit) : AbsLifeCycle() {
         override fun onViewLifeStateChange(state: LifeState) {
             //当监听到View生命周期Destroy的时候就把provider移出
             if (state == LifeState.DESTROY) {
