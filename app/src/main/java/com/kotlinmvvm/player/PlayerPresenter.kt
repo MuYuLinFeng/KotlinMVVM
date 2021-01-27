@@ -1,7 +1,7 @@
 package com.kotlinmvvm.player
 
 import com.kotlinmvvm.lifecycle.AbsLifeCycle
-import com.kotlinmvvm.lifecycle.ILifeCycle
+import com.kotlinmvvm.lifecycle.ILifeCycleOwner
 import com.kotlinmvvm.lifecycle.LifeState
 import com.kotlinmvvm.player.domain.Music
 
@@ -24,7 +24,7 @@ import com.kotlinmvvm.player.domain.Music
  * 当前歌曲
  * 当前状态
  */
-class PlayerPresenter private constructor() : AbsLifeCycle() {
+class PlayerPresenter(val lifeOwner: ILifeCycleOwner) : AbsLifeCycle() {
     var currentMusic = DataListenerContainer<Music>()
     var currentPlayState = DataListenerContainer<PlayState>()
     private val playerModel by lazy {
@@ -34,16 +34,9 @@ class PlayerPresenter private constructor() : AbsLifeCycle() {
         MusicPlayer()
     }
 
-    companion object {
-        val instance by lazy {
-            PlayerPresenter()
-        }
-    }
-
     init {
         currentPlayState.value = PlayState.NONE
     }
-
 
     enum class PlayState {
         NONE, PLAYING, PAUSE, LOADING
@@ -70,7 +63,6 @@ class PlayerPresenter private constructor() : AbsLifeCycle() {
         currentPlayState.value = PlayState.PLAYING
         currentMusic.value = getNextSongById()
         musicPlayer.play(currentMusic.value!!)
-
     }
 
     private fun getSongById(): Music {
@@ -90,6 +82,7 @@ class PlayerPresenter private constructor() : AbsLifeCycle() {
 
     override fun onStart() {
         //启动监听
+        lifeOwner.getLifeCycleProvider().addLifeListener(this)
     }
 
     override fun onResume() {
@@ -100,12 +93,13 @@ class PlayerPresenter private constructor() : AbsLifeCycle() {
 
     override fun onStop() {
         //停止监听
+        lifeOwner.getLifeCycleProvider().removeLifeListener(this)
     }
 
     override fun onDestroy() {
     }
 
     override fun onViewLifeStateChange(state: LifeState) {
-
+        println("onViewLifeStateChange  :$state")
     }
 }

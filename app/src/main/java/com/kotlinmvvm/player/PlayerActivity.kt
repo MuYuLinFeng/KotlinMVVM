@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.activity_player.*
 class PlayerActivity : BaseActivity() {
 
     private val playerPresenter by lazy {
-        PlayerPresenter.instance
+        PlayerPresenter(this)
     }
 
     init {
@@ -27,11 +27,13 @@ class PlayerActivity : BaseActivity() {
      */
     private fun initDataListener() {
         playerPresenter.currentMusic.addListener(this) {
+            println("=======currentMusic  : $it")
             //因为发生改变 更新UI
             musicTitle.text = it?.name
             musicCover.text = it?.cover
         }
         playerPresenter.currentPlayState.addListener(this) {
+            println("======= currentPlayState : $it")
             it?.let {
                 when (it) {
                     PlayerPresenter.PlayState.PAUSE -> {

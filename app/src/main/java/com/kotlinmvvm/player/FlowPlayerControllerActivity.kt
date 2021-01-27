@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.activity_flow_player_controller.*
 
 class FlowPlayerControllerActivity : BaseActivity() {
     private val playerPresenter by lazy {
-        PlayerPresenter.instance
+        PlayerPresenter(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -20,6 +20,8 @@ class LifeCycleProvider {
     }
 
     fun makeLifeState(state: LifeState) {
+        println("makeLifeState  :$state")
+        currentState = state
         lifecycleListener.forEach {
             it.onViewLifeStateChange(state)
         }
@@ -73,12 +75,12 @@ class LifeCycleProvider {
     }
 
     fun isAtLeast(state: LifeState): Boolean {
-        println("current state $currentState ===> $state")
+        println("isAtLeast state $currentState ===> $state ---> ${currentState > state}")
         return currentState > state
     }
 
     fun isAtMost(state: LifeState): Boolean {
-        println("current state $currentState ===> $state")
+        println("isAtMost state $currentState ===> $state ---> ${currentState < state}")
         return currentState < state
     }
 }

@@ -14,6 +14,7 @@ class DataListenerContainer<T> {
 
     var value: T? = null
         set(value) {
+            field = value
             //判断线程
             if (Looper.getMainLooper().thread === Thread.currentThread()) {
                 blocks.forEach {
