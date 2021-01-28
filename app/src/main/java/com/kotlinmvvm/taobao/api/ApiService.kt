@@ -11,7 +11,6 @@ interface ApiService {
     }
 
     @GET("onSell/{page}")
-    suspend fun getOnSellList(@Path("page") page: Int): ResultData<OnSellData> {
-
-    }
+    suspend fun getOnSellList(@Path("page") page: Int):
+            ResultData<OnSellData>
 }

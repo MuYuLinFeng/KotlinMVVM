@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit
 /*
     创建Retrofit
  */
-class RetrofitClient {
+object RetrofitClient {
     private val okHttpClient: OkHttpClient = OkHttpClient.Builder()
         .callTimeout(30, TimeUnit.SECONDS)
         .build()
