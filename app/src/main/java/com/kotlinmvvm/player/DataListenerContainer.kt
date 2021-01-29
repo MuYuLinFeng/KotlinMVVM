@@ -1,9 +1,11 @@
 package com.kotlinmvvm.player
 
 import android.os.Looper
-import androidx.arch.core.executor.ArchTaskExecutor
 import com.kotlinmvvm.App
-import com.kotlinmvvm.lifecycle.*
+import com.kotlinmvvm.lifecycle.AbsLifeCycle
+import com.kotlinmvvm.lifecycle.ILifeCycleOwner
+import com.kotlinmvvm.lifecycle.LifeCycleProvider
+import com.kotlinmvvm.lifecycle.LifeState
 
 /*
     数据容器，可以监听数据的变化

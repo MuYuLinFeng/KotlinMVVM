@@ -4,10 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvOnSell"
+    <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
+        android:id="@+id/tkRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:overScrollMode="never"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvOnSell"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#dfdfdf"
+            android:overScrollMode="never" />
+    </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

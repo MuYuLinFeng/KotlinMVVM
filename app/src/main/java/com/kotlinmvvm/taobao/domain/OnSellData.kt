@@ -1,7 +1,5 @@
 package com.kotlinmvvm.taobao.domain
 
-import javax.sql.StatementEvent
-
 data class OnSellData(
     val tbk_dg_optimus_material_response: TbkDgOptimusMaterialResponse
 ) {
@@ -11,7 +9,7 @@ data class OnSellData(
         val result_list: ResultList
     ) {
         data class ResultList(
-            val map_data: ArrayList<MapData>
+            val map_data: MutableList<MapData>
         ) {
             data class MapData(
                 val category_id: Int,

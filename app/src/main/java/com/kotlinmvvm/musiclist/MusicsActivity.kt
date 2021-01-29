@@ -3,7 +3,6 @@ package com.kotlinmvvm.musiclist
 import android.os.Bundle
 import com.kotlinmvvm.R
 import com.kotlinmvvm.base.BaseActivity
-import com.kotlinmvvm.lifecycle.ILifeCycleOwner
 import kotlinx.android.synthetic.main.activity_musics.*
 
 class MusicsActivity : BaseActivity() {

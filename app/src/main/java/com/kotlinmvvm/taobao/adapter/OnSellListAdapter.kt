@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.kotlinmvvm.R
 import com.kotlinmvvm.taobao.adapter.OnSellListAdapter.InnerHolder
 import com.kotlinmvvm.taobao.domain.OnSellData
@@ -27,6 +28,11 @@ class OnSellListAdapter : RecyclerView.Adapter<InnerHolder>() {
         holder.itemView.apply {
             with(mContentList[position]) {
                 tvTitle.text = title
+                tvPrice.text = String.format("%.2f", zk_final_price.toFloat() - coupon_amount)
+                Glide
+                    .with(context)
+                    .load("https:$pict_url")
+                    .into(ivIcon)
             }
         }
     }
@@ -35,8 +41,9 @@ class OnSellListAdapter : RecyclerView.Adapter<InnerHolder>() {
         return mContentList.size
     }
 
-    fun setData(mutableList: ArrayList<OnSellData.TbkDgOptimusMaterialResponse.ResultList.MapData>) {
-        mContentList = mutableList
+    fun setData(mutableList: MutableList<OnSellData.TbkDgOptimusMaterialResponse.ResultList.MapData>) {
+        mContentList.clear()
+        mContentList.addAll(mutableList)
         notifyDataSetChanged()
     }
 }

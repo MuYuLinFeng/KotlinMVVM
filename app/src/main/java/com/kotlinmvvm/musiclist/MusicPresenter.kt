@@ -1,10 +1,12 @@
 package com.kotlinmvvm.musiclist
 
-import com.kotlinmvvm.lifecycle.*
+import com.kotlinmvvm.lifecycle.AbsLifeCycle
+import com.kotlinmvvm.lifecycle.ILifeCycleOwner
+import com.kotlinmvvm.lifecycle.LifeState
 import com.kotlinmvvm.player.DataListenerContainer
 import com.kotlinmvvm.player.domain.Music
 
-class MusicPresenter(lifeOwner: ILifeCycleOwner){
+class MusicPresenter(lifeOwner: ILifeCycleOwner) {
     enum class MusicLoadState {
         LOADING, EMPTY, SUCCESS, ERROR
     }

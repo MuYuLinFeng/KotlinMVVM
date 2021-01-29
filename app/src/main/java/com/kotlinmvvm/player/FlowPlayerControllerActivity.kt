@@ -1,7 +1,6 @@
 package com.kotlinmvvm.player
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.kotlinmvvm.R
 import com.kotlinmvvm.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_flow_player_controller.*

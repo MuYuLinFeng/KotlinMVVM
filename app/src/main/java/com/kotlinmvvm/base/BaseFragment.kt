@@ -6,7 +6,7 @@ import com.kotlinmvvm.lifecycle.ILifeCycleOwner
 import com.kotlinmvvm.lifecycle.LifeCycleProvider
 import com.kotlinmvvm.lifecycle.LifeState
 
-open class BaseFragment : Fragment() ,ILifeCycleOwner{
+open class BaseFragment : Fragment(), ILifeCycleOwner {
     val lifeProvider by lazy {
         LifeCycleProvider()
     }
