@@ -27,6 +27,9 @@ import com.kotlinmvvm.player.domain.Music
 class PlayerPresenter(val lifeOwner: ILifeCycleOwner) : AbsLifeCycle() {
     var currentMusic = DataListenerContainer<Music>()
     var currentPlayState = DataListenerContainer<PlayState>()
+
+    var livePlayerState = LivePlayerState.instance
+
     private val playerModel by lazy {
         PlayerModel()
     }
@@ -47,9 +50,11 @@ class PlayerPresenter(val lifeOwner: ILifeCycleOwner) : AbsLifeCycle() {
         if (currentPlayState.value == PlayState.PLAYING) {
             currentPlayState.value = PlayState.PAUSE
             musicPlayer.pause(currentMusic.value!!)
+            livePlayerState.postValue(PlayState.PAUSE)
         } else {
             musicPlayer.play(currentMusic.value!!)
             currentPlayState.value = PlayState.PLAYING
+            livePlayerState.postValue(PlayState.PLAYING)
         }
     }
 
@@ -57,12 +62,14 @@ class PlayerPresenter(val lifeOwner: ILifeCycleOwner) : AbsLifeCycle() {
         currentPlayState.value = PlayState.PLAYING
         currentMusic.value = getLastSongById()
         musicPlayer.play(currentMusic.value!!)
+        livePlayerState.postValue(PlayState.PLAYING)
     }
 
     fun playNext() {
         currentPlayState.value = PlayState.PLAYING
         currentMusic.value = getNextSongById()
         musicPlayer.play(currentMusic.value!!)
+        livePlayerState.postValue(PlayState.PLAYING)
     }
 
     private fun getSongById(): Music {

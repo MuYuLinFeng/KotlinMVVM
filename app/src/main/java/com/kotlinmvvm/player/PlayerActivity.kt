@@ -1,6 +1,7 @@
 package com.kotlinmvvm.player
 
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import com.kotlinmvvm.R
 import com.kotlinmvvm.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_player.*
@@ -22,10 +23,27 @@ class PlayerActivity : BaseActivity() {
         initDataListener()
     }
 
+    private val livePlayerObserver by lazy {
+        LivePlayerStateObserver()
+    }
+
+    class LivePlayerStateObserver : Observer<PlayerPresenter.PlayState> {
+        override fun onChanged(t: PlayerPresenter.PlayState?) {
+            println("$t")
+        }
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        LivePlayerState.instance.removeObserver(livePlayerObserver)
+    }
+
     /*
         对数据进行监听
      */
     private fun initDataListener() {
+        LivePlayerState.instance.observeForever(livePlayerObserver)
         playerPresenter.currentMusic.addListener(this) {
             println("=======currentMusic  : $it")
             //因为发生改变 更新UI
